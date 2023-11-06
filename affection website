@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Calculator</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Love Calculator</h1>
+
+<p>Enter two names to find out the love compatibility:</p>
+<input type="text" id="name1" placeholder="Name 1">
+<input type="text" id="name2" placeholder="Name 2">
+<button onclick="calculateLove()">Calculate Love</button>
+
+<p id="result"></p>
+
+<script>
+function getLoveScore() {
+  return Math.floor(Math.random() * 101);
+}
+
+function calculateLove() {
+  var name1 = document.getElementById("name1").value;
+  var name2 = document.getElementById("name2").value;
+  var loveScore = getLoveScore();
+  var result = name1 + " and " + name2 + "'s love score is " + loveScore + "%!";
+  document.getElementById("result").innerText = result;
+}
+</script>
+
+</body>
+</html>
