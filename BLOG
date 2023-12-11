@@ -59,3 +59,291 @@ Refer to [Paul Graham's Articles](http://www.paulgraham.com/articles.html) for i
 
 **3. What if I don't remember how to do something?**
    - Use this as an opportunity to identify weak points. Review previous lessons or online documentation to fill knowledge gaps. Frontend and backend technologies involved include Node.js and Express.js.
+
+
+
+
+
+
+
+I can provide you with a basic structure and guidance for the server-side code. Please note that this is a simplified example, and you may need to adapt it based on your specific requirements and preferences. Also, I'll leave the styling aspect to you, as it's important for your learning experience. 
+
+Let's start by creating the project structure and setting up the server:
+
+1. **Project Structure:**
+   - Create a new project folder.
+   - Inside the folder, create the following files and folders:
+      - `app.js` (main server file)
+      - `views` (folder for EJS files)
+      - `public` (folder for static files like CSS)
+      - `routes` (folder for route handlers)
+
+2. **Setup `app.js`:**
+   ```javascript
+   const express = require('express');
+   const bodyParser = require('body-parser');
+   const path = require('path');
+
+   const app = express();
+   const PORT = process.env.PORT || 3000;
+
+   // Middleware
+   app.use(bodyParser.urlencoded({ extended: true }));
+   app.use(express.static(path.join(__dirname, 'public')));
+   app.set('view engine', 'ejs');
+   app.set('views', path.join(__dirname, 'views'));
+
+   // Routes
+   const postsRoutes = require('./routes/posts');
+   app.use('/posts', postsRoutes); // Assuming posts-related routes
+
+   // Server setup
+   app.listen(PORT, () => {
+     console.log(`Server is running on port ${PORT}`);
+   });
+   ```
+
+3. **Create `routes/posts.js`:**
+   ```javascript
+   const express = require('express');
+   const router = express.Router();
+
+   // Sample data (replace with a database in a real project)
+   let posts = [
+     { id: 1, title: 'First Post', content: 'This is the content of the first post.' },
+     // Add more sample posts as needed
+   ];
+
+   // Display all posts
+   router.get('/', (req, res) => {
+     res.render('index', { posts });
+   });
+
+   // Display form for creating a new post
+   router.get('/new', (req, res) => {
+     res.render('new');
+   });
+
+   // Handle submission of a new post
+   router.post('/', (req, res) => {
+     const { title, content } = req.body;
+     const id = posts.length + 1;
+     posts.push({ id, title, content });
+     res.redirect('/posts');
+   });
+
+   // Add more routes for editing and deleting posts
+
+   module.exports = router;
+   ```
+
+4. **Create EJS files in the `views` folder:**
+   - `views/index.ejs`
+   ```html
+   <h1>All Posts</h1>
+   <ul>
+     <% posts.forEach(post => { %>
+       <li><%= post.title %>: <%= post.content %></li>
+     <% }); %>
+   </ul>
+   ```
+
+   - `views/new.ejs`
+   ```html
+   <h1>Create a New Post</h1>
+   <form action="/posts" method="POST">
+     <label for="title">Title:</label>
+     <input type="text" id="title" name="title" required>
+     <br>
+     <label for="content">Content:</label>
+     <textarea id="content" name="content" required></textarea>
+     <br>
+     <button type="submit">Submit</button>
+   </form>
+   ```
+
+This is a basic setup to get you started. You'll need to add more routes and logic for editing and deleting posts. Additionally, you may want to incorporate a database to persistently store posts in a real-world scenario. For styling, create a CSS file in the `public` folder and link it in your EJS templates.
+
+Feel free to ask if you have specific questions or need further assistance!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Blog Web App</title>
+</head>
+<body>
+
+  <h1>All Posts</h1>
+  <ul id="postList"></ul>
+
+  <h2>Create a New Post</h2>
+  <form id="postForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+    <br>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required></textarea>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+li:hover {
+  transform: scale(1.05);
+}
+
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, textarea, button {
+  margin-bottom: 15px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const postList = document.getElementById('postList');
+  const postForm = document.getElementById('postForm');
+
+  // Sample data (replace with API calls to your server)
+  let posts = [
+    { id: 1, title: 'First Post', content: 'This is the content of the first post.' },
+    // Add more sample posts as needed
+  ];
+
+  // Function to render posts
+  function renderPosts() {
+    postList.innerHTML = '';
+    posts.forEach(post => {
+      const li = document.createElement('li');
+      li.textContent = `${post.title}: ${post.content}`;
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => deletePost(post.id));
+      li.appendChild(deleteButton);
+      postList.appendChild(li);
+    });
+  }
+
+  // Function to handle form submission
+  postForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+
+    // Sample API call to add a new post (replace with your server-side logic)
+    const newPost = { id: posts.length + 1, title, content };
+    posts.push(newPost);
+    renderPosts();
+    postForm.reset();
+  });
+
+  // Function to delete a post
+  function deletePost(postId) {
+    // Sample API call to delete a post (replace with your server-side logic)
+    posts = posts.filter(post => post.id !== postId);
+    renderPosts();
+  }
+
+  // Initial render
+  renderPosts();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
