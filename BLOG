@@ -1,0 +1,61 @@
+### Capstone Project Instructions: Building a Blog Web Application
+
+**Project Description:**
+The goal of this project is to create a Blog web application using Node.js, Express.js, and EJS. The application will allow users to create, view, update, and delete blog posts. The project emphasizes styling for a good user experience.
+
+**Example:**
+Refer to [Paul Graham's Articles](http://www.paulgraham.com/articles.html) for inspiration.
+
+**Deliverables:**
+- One Node project for the website function.
+- At least one EJS file for the website structure.
+- At least one CSS file for website styling.
+
+**Features:**
+1. **Post Creation:** Users can create new blog posts.
+2. **Post Viewing:** Home page displays all user posts.
+3. **Post Update/Delete:** Users can edit and delete posts.
+4. **Styling:** Application is well-styled and responsive for desktop and mobile.
+
+**Technical Requirements:**
+1. **Node.js & Express.js:** Web server built using Node.js and Express.js for routing and middleware.
+2. **EJS:** Templating engine to generate dynamic HTML.
+
+**Timeline:**
+
+**Hour 0: Planning**
+- Gather content and design ideas.
+- Create wireframes and mockups.
+- Plan application structure, routes, and pages.
+
+**Hour 1: Setup**
+- Set up the project repository.
+- Initialize Node.js application.
+- Install dependencies (Express.js, EJS).
+- Create application structure, including routes, views, and static files.
+- Set up Express.js server and define necessary routes.
+
+**Hour 2-3: Implementing Features**
+- Implement post creation feature (form creation and submission handling).
+- Implement post viewing feature (display all posts on home page).
+- Implement post edit feature (form to edit and save posts).
+- Implement delete feature (remove post from home page).
+- Test application for correct post creation and viewing.
+
+**Hour 4-5: Styling and Polishing**
+- Create a CSS file for styling.
+- Link CSS to EJS templates.
+- Style application using CSS or frameworks like Bootstrap/Flexbox/Grid.
+- Test application on various devices and browsers.
+- Fix bugs or issues found during testing.
+
+**FAQs:**
+
+**1. Where are the starting files/styling files/solution code?**
+   - Capstone projects are designed for independent development skills. No starting files, styling files, steps, or solution code is provided.
+
+**2. Can I use these Capstone projects in my job interviews/portfolio?**
+   - Yes! Capstone projects are meant to showcase your independent skills and can be added to your portfolio.
+
+**3. What if I don't remember how to do something?**
+   - Use this as an opportunity to identify weak points. Review previous lessons or online documentation to fill knowledge gaps. Frontend and backend technologies involved include Node.js and Express.js.
